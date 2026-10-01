@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Tailwind v4 core import */
+@import "tailwindcss";
+
+/* Tailwind v4 Theme Configuration */
+@theme {
+  --animate-marquee: marquee 20s linear infinite;
+  --color-canvas: #fcfaf5;
+  --color-surface: #ffffff;
+  
+  --color-emerald-900: #064e3b;
+  --color-emerald-800: #065f46;
+  --color-emerald-600: #059669;
+  
+  --color-accent-yellow: #ffe95c;
+  --color-accent-mint: #d1fae5;
+  
+  --color-neutral-gray: #b6b6b6;
+  --color-neutral-whisper: #f1f1f1;
+
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --shadow-material-subtle: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  --shadow-material-hover: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  --radius-apple-card: 16px;
+  --radius-apple-button: 8px;
+  
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-emerald-900 font-body antialiased;
+  }
+  
+  ::selection {
+    @apply bg-accent-yellow text-emerald-900;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-wide;
+  }
+  
+}
+@keyframes marquee { 
+  0% { transform: translateX(0%); } 
+  100% { transform: translateX(-100%); } 
+}
