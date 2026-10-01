@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
 import { Modal } from '../ui/Modal';
 import { MessageSquare, Mail, Send, CheckCircle2, Phone, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -34,15 +33,21 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     if (!name.trim()) return;
 
     setIsSubmitted(true);
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.6 }
+    // Safe dynamic confetti trigger that never throws even if module is pending
+    import('canvas-confetti')
+      .then((mod) => {
+        const confettiFn = mod.default || mod;
+        if (typeof confettiFn === 'function') {
+          confettiFn({
+            particleCount: 80,
+            spread: 60,
+            origin: { y: 0.6 }
+          });
+        }
+      })
+      .catch(() => {
+        // Safe fallback
       });
-    } catch {
-      // Confetti fallback
-    }
 
     setTimeout(() => {
       // Reset after a brief delay
